@@ -38,6 +38,10 @@ const serverConfig = {
     path: path.resolve(__dirname, './dist'),
     filename: '[name].js',
   },
+  externals: {
+    // puppeteer cannot be bundled via webpack. It will break the rendering. Puppeteer will be loaded via node_modules even in prod version
+    puppeteer: "require('puppeteer')",
+  },
   module: {
     rules: [
       { test: /\.(js|tsx?)$/, loader: 'ts-loader', exclude: /node_modules/ },
